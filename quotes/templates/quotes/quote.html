@@ -1,0 +1,19 @@
+<!-- quotes/templates/quotes/quote.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+</head>
+
+{% block title %}Random Leonardo da Vinci Quote{% endblock %}
+
+{% block content %}
+    <h2>Random Quote</h2>
+    <div class="quote-container">
+        <img src="{{ image }}" alt="Leonardo da Vinci Image" class="quote-image">
+        <p class="quote">{{ quote }}</p>
+    </div>
+{% endblock %}

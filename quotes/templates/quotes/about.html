@@ -1,0 +1,18 @@
+<!-- quotes/templates/quotes/about.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+</head>
+{% block title %}About Leonardo da Vinci{% endblock %}
+
+{% block content %}
+    <h2>About Leonardo da Vinci</h2>
+    <p>{{ biography }}</p>
+
+    <h3>About the Creator</h3>
+    <p>This web application was created by Kelly Chen.</p>
+{% endblock %}

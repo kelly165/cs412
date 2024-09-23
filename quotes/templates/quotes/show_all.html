@@ -1,0 +1,23 @@
+<!-- quotes/templates/quotes/show_all.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+</head>
+{% block title %}All Leonardo da Vinci Quotes{% endblock %}
+    
+{% block content %}
+
+    <h2>All Quotes</h2>
+    <div class="all-quotes-container">
+        {% for quote, image in zipped_quotes %}
+            <div class="quote-item">
+                <img src="{{ image }}" alt="Leonardo da Vinci Image" class="quote-image">
+                <p class="quote">{{ quote }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
