@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url='/quotes/', permanent=False)),  # Redirect root to quotes
+    #path('', RedirectView.as_view(url='/quotes/', permanent=False)),  # Redirect root to quotes
     path('quotes/', include('quotes.urls')),  # Include the quotes app URLs
     path('formdata/', include('formdata.urls')),
     path('restaurant/', include('restaurant.urls')), 
