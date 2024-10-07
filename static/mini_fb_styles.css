@@ -1,0 +1,21 @@
+body {
+    background-color: rgb(165, 47, 255);
+    color: white;
+}
+
+
+div {
+    color: green;
+    border: 2px solid yellow;
+    padding: 10px;
+    margin: 25px;
+}
+
+table {
+    border: 1px solid pink;
+}
+
+td {
+    border: 1px solid orange;
+    text-align: center;
+}

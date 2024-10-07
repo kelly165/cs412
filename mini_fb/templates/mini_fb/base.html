@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>{% block title %}My Social Media App{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'mini_fb_styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Mini Facebook</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                
+                <!-- Future navigation links -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- content block -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Social Media App</p>
+    </footer>
+</body>
+</html>

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "formdata", #new app
     'restaurant',
     'blog',
+    'mini_fb',
 
 ]
 
