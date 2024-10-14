@@ -18,3 +18,14 @@ class Article(models.Model):
     def __str__(self):
         '''Return a string representation of this object'''
         return f'{self.title} by {self.author}'
+    
+class Comment(models.Model):
+        '''model the one to many relationship with Article'''
+        article = models.ForeignKey("Article", on_delete=models.CASCADE)
+        author = models.TextField(blank = False)
+        text = models.TextField(blank = False)
+        published = models.DateTimeField(auto_now=True)
+
+        def __str__(self):
+            '''return strig repesentation of coment'''
+            return f'{self.text}'

@@ -15,7 +15,9 @@
     <article>
         <h2>{{a.title}}</h2>
         <h3>by {{a.author}} at {{a.published}}</h3>
-
+        <div>
+            <h2><a href="%url 'article a.pk%">{{a.title}}</a></h2>
+        </div>
         <!--new: display the image URL stored in database-->
         <img src="{{a.image_url}}" alt="{{a.image_url}}"> 
         <p>

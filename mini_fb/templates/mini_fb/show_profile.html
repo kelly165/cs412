@@ -1,0 +1,61 @@
+<!-- mini_fb/templates/mini_fb/show_profile.html -->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block title %}Profile of {{ profile.first_name }}{% endblock %}
+
+{% block content %}
+    <div class="profile-container">
+        <h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
+        <div class="profile-image">
+            <img src="{{ profile.profile_image_url }}" alt="{{ profile.first_name }}'s Profile Picture" width="300">
+        </div>
+        <div class="profile-details">
+            <p><strong>First Name:</strong> {{ profile.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ profile.last_name }}</p>
+            <p><strong>City:</strong> {{ profile.city }}</p>
+            <p><strong>Email:</strong> {{ profile.email }}</p>
+        </div>
+    </div>
+    <h2>Status Messages</h2>
+    {% if status_messages %}
+        <ul>
+        {% for message in status_messages %}
+            <li>
+            <strong>{{ message.timestamp|date:"F j, Y, g:i a" }}:</strong> 
+            {{ message.message }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No status messages found.</p>
+    {% endif %}
+    
+    
+{% endblock %}
+
+<style>
+    .profile-container {
+        text-align: center;
+        margin: 20px auto;
+        width: 60%;
+        border: 2px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-image img {
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-details {
+        margin-top: 20px;
+        font-size: 1.1em;
+    }
+
+    .profile-details p {
+        margin: 10px 0;
+    }
+</style>

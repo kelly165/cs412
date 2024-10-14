@@ -1,30 +1,36 @@
+<!-- mini_fb/templates/mini_fb/show_all_profiles.html -->
+
 {% extends 'mini_fb/base.html' %}
 
-{% block title %}
-    All Profiles
-{% endblock %}
+{% block title %}All Profiles{% endblock %}
 
 {% block content %}
     <h2>All Profiles</h2>
     <table>
         <thead>
             <tr>
+                <th>Image</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>City</th>
-                <th>Profile Image</th>
             </tr>
         </thead>
         <tbody>
             {% for profile in profiles %}
-            <tr>
-                <td>{{ profile.first_name }}</td>
-                <td>{{ profile.last_name }}</td>
-                <td>{{ profile.city }}</td>
-                <td>
-                    <img src="{{ profile.profile_image_url }}" alt="{{ profile.first_name }}'s profile picture" width="100">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <!-- Link to the profile page using the profile image -->
+                        <a href="{% url 'show_profile' profile.pk %}">
+                            <img src="{{ profile.profile_image_url }}" alt="{{ profile.first_name }}'s profile picture" width="100">
+                        </a>
+                    </td>
+                    <td>
+                        <!-- Link to the profile page using the profile's first name -->
+                        <a href="{% url 'show_profile' profile.pk %}">{{ profile.first_name }}</a>
+                    </td>
+                    <td>{{ profile.last_name }}</td>
+                    <td>{{ profile.city }}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

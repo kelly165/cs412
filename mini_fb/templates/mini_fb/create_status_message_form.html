@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Post a Status Message</h2>
+  <form method="POST" action="{% url 'create_status_message' profile_pk=profile.pk %}"> <!-- Adjust the URL as needed -->
+    {% csrf_token %}
+    
+    <div>
+      <label for="id_message">Status Message:</label>
+      {{ form.message }}  <!-- Automatically render the message field -->
+    </div>
+
+    <button type="submit">Post Message</button>
+  </form>
+{% endblock %}
