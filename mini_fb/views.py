@@ -1,16 +1,24 @@
 from django.shortcuts import render
-from .models import StatusMessage
-from .forms import CreateStatusMessageForm
+from .models import StatusMessage, Image
+from .forms import CreateStatusMessageForm, UpdateProfileForm
 
 # Create your views here.
 from django.views.generic import ListView
 from .models import Profile
 from django.views.generic import DetailView
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
+
 from .forms import CreateProfileForm
 
+class UpdateProfileView(UpdateView):
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'mini_fb/update_profile_form.html'  # Template
 
+    def get_success_url(self):
+        #redirect to the profile page
+        return reverse_lazy('show_profile', kwargs={'pk': self.object.pk})
 
 class ShowAllProfilesView(ListView):
     model = Profile
@@ -34,16 +42,34 @@ class CreateProfileView(CreateView):
 class CreateStatusMessageView(CreateView):
     model = StatusMessage
     form_class = CreateStatusMessageForm
-    template_name = 'mini_fb/create_status_message_form.html'  # Template for the form
+    template_name = 'mini_fb/create_status_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Retrieve the profile based on the primary key from the URL
+        profile_pk = self.kwargs['pk']
+        context['profile'] = Profile.objects.get(pk=profile_pk)
+        return context
 
     def form_valid(self, form):
-        form.instance.profile = self.get_profile()  # Set the profile for this status message
+        # Get the profile based on the primary key from the URL
+        profile_pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=profile_pk)
+        # Set the profile for the status message
+        form.instance.profile = profile
+        
+        # Save the status message to database
+        sm = form.save()
+        
+        # Process uploaded images
+        files = self.request.FILES.getlist('files')
+        for file in files:
+            # Create an Image object for each uploaded file
+            image = Image(image_file=file, status_message=sm)
+            image.save()  # Save the Image object to the database
+        
         return super().form_valid(form)
 
-    def get_profile(self):
-        # Logic to get the profile from the URL or session
-        # Assuming you pass profile_pk in the URL
-        return Profile.objects.get(pk=self.kwargs['profile_pk'])
-
     def get_success_url(self):
-        return reverse('show_profile', kwargs={'pk': self.object.profile.pk})  # Redirect back to the profile
+        # Return the URL to the profile page
+        return reverse_lazy('show_profile', kwargs={'pk': self.kwargs['pk']})

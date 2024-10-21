@@ -16,15 +16,28 @@
             <p><strong>City:</strong> {{ profile.city }}</p>
             <p><strong>Email:</strong> {{ profile.email }}</p>
         </div>
+        <p>
+            <a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
+        </p>
     </div>
     <h2>Status Messages</h2>
+    <a href="{% url 'create_status_message' profile.pk %}">Post a Status Message</a>
     {% if status_messages %}
         <ul>
         {% for message in status_messages %}
             <li>
             <strong>{{ message.timestamp|date:"F j, Y, g:i a" }}:</strong> 
             {{ message.message }}
+
+            {% if message.get_images %}
+                <div class="status-images">
+                    {% for img in message.get_images %}
+                        <img src="{{ img.image_file.url }}" alt="Image for status message" style="max-width:200px;">
+                    {% endfor %}
+                </div>
+            {% endif %}
             </li>
+
         {% endfor %}
         </ul>
     {% else %}
