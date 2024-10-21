@@ -6,11 +6,28 @@ from .forms import CreateStatusMessageForm, UpdateProfileForm
 from django.views.generic import ListView
 from .models import Profile
 from django.views.generic import DetailView
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from .forms import CreateProfileForm
 
+class UpdateStatusMessageView(UpdateView):
+    model = StatusMessage
+    form_class = CreateStatusMessageForm
+    template_name = 'mini_fb/update_status_form.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('show_profile', kwargs={'pk': self.object.profile.pk})
+    
+class DeleteStatusMessageView(DeleteView):
+    model = StatusMessage
+    template_name = 'mini_fb/delete_status_form.html' 
+    context_object_name = 'status_message'
+
+    def get_success_url(self):
+        # Get the profile associated with the status message
+        return reverse_lazy('show_profile', kwargs={'pk': self.object.profile.pk})
+    
 class UpdateProfileView(UpdateView):
     model = Profile
     form_class = UpdateProfileForm

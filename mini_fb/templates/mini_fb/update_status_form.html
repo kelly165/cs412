@@ -1,0 +1,21 @@
+<!-- mini_fb/templates/mini_fb/update_status_form.html -->
+
+{% extends "mini_fb/base.html" %}
+
+{% block content %}
+  <h2>Update Status Message</h2>
+  <form method="POST" action="{% url 'update_status_message' object.pk %}">
+    {% csrf_token %}
+    
+    <div>
+      <label for="id_message">Status Message:</label>
+      {{ form.message }}  <!-- Automatically render the message field -->
+    </div>
+
+    <button type="submit">Update Message</button>
+  </form>
+
+  <form method="GET" action="{% url 'show_profile' object.profile.pk %}">
+    <button type="submit">Cancel</button>
+  </form>
+{% endblock %}

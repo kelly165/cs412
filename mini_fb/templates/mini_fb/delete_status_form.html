@@ -1,0 +1,20 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block title %}Delete Status Message{% endblock %}
+
+{% block content %}
+    <h2>Delete Status Message</h2>
+    <p>Are you sure you want to delete this status message?</p>
+    <p><strong>{{ status_message.timestamp|date:"F j, Y, g:i a" }}:</strong> {{ status_message.message }}</p>
+
+    <!-- Form to confirm deletion -->
+    <form method="POST" action="{% url 'delete_status_message' status_message.pk %}">
+        {% csrf_token %}
+        <button type="submit">Confirm Deletion</button>
+    </form>
+
+    <!-- Form to cancel deletion -->
+    <form method="GET" action="{% url 'show_profile' status_message.profile.pk %}">
+        <button type="submit">Cancel</button>
+    </form>
+{% endblock %}
