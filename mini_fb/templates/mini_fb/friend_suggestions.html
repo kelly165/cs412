@@ -1,0 +1,23 @@
+<!-- mini_fb/templates/mini_fb/friend_suggestions.html -->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+  <h1>Friend Suggestions for {{ profile.first_name }} {{ profile.last_name }}</h1>
+  <div>
+    {% if friend_suggestions %}
+      <ul>
+        {% for friend in friend_suggestions %}
+          <li>
+            <img src="{{ friend.profile_image_url }}" alt="{{ friend.first_name }}'s profile picture" style="width: 50px; height: 50px;"/>
+            {{ friend.first_name }} {{ friend.last_name }}
+            <a href="{% url 'add_friend' profile.pk friend.pk %}">Add Friend</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No friend suggestions available.</p>
+    {% endif %}
+  </div>
+  <a href="{% url 'show_profile' profile.pk %}">Back to Profile</a>
+{% endblock %}

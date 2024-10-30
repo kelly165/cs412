@@ -1,18 +1,20 @@
 body {
     background-color: rgb(165, 47, 255);
     color: white;
+    
 }
 
-
 div {
-    color: green;
+    color: rgb(255, 255, 255);
     border: 2px solid yellow;
     padding: 10px;
     margin: 25px;
 }
 
+
 table {
     border: 1px solid pink;
+    color: aliceblue;
 }
 
 td {

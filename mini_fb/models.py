@@ -20,6 +20,67 @@ class Profile(models.Model):
     def get_absolute_url(self):
         return reverse('show_profile', args=[str(self.pk)])
     
+    def get_friends(self):
+        from .models import Friend  # Avoid circular imports
+
+        # Geet friends where this profile is profile1 or profile2
+        friends_as_profile1 = Friend.objects.filter(profile1=self).values_list('profile2', flat=True)
+        friends_as_profile2 = Friend.objects.filter(profile2=self).values_list('profile1', flat=True)
+
+        # Combine and fetch profile instances avoiding duplicates
+        friend_ids = list(friends_as_profile1) + list(friends_as_profile2)
+        return Profile.objects.filter(id__in=friend_ids)
+    def add_friend(self, other):
+    # Ensure the other Profile isn't self to avoid self-friending
+        if self == other:
+            return
+
+        # Check for existing Friend relationships (either direction)
+        if not Friend.objects.filter(
+            profile1=self, profile2=other
+        ).exists() and not Friend.objects.filter(
+            profile1=other, profile2=self
+        ).exists():
+            # Create and save a new Friend instance if no relationship exists
+            Friend.objects.create(profile1=self, profile2=other)
+    def get_friend_suggestions(self):
+        # Get all profiles except the current one
+        all_profiles = Profile.objects.exclude(pk=self.pk)
+        
+        # Get friends of the current profile
+        friends = Friend.objects.filter(models.Q(profile1=self) | models.Q(profile2=self))
+        
+        # Gettting the ids of the friends
+        friend_ids = [friend.profile1.pk if friend.profile1 != self else friend.profile2.pk for friend in friends]
+        
+        # Filter out friends from allprofiles
+        friend_suggestions = all_profiles.exclude(pk__in=friend_ids)
+        
+        return friend_suggestions
+    
+    def get_news_feed(self):
+        # Start with the user's own status messages
+        own_messages = self.get_status_messages()
+
+        # Get friends
+        friends = self.get_friends()
+
+        # Get friends' status messages
+        friends_messages = StatusMessage.objects.filter(profile__in=friends)
+
+        # Combine the two QuerySets and order by creation date (most recent first)
+        all_messages = own_messages | friends_messages
+        return all_messages.order_by('-timestamp')  # Assuming `created_at` is the field for message creation time
+
+
+class Friend(models.Model):
+    profile1 = models.ForeignKey(Profile, related_name="profile1", on_delete=models.CASCADE)
+    profile2 = models.ForeignKey(Profile, related_name="profile2", on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.profile1} & {self.profile2}"
+
 class StatusMessage(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)  # Automatically set timestamp
     message = models.TextField()  # Text of the status message
