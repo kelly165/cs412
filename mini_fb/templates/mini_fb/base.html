@@ -14,7 +14,22 @@
                 <li><a href="{% url 'show_all_profiles' %}">Home</a> </li>
                 
                 <!-- Future navigation links -->
+                {% if user.is_authenticated %}
+                
+                <li>Hello, {{ user.username }}!</li>
+
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
             </ul>
+            
+            
+
+
             
         </nav>
     </header>

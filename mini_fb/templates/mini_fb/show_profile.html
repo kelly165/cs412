@@ -16,36 +16,48 @@
             <p><strong>City:</strong> {{ profile.city }}</p>
             <p><strong>Email:</strong> {{ profile.email }}</p>
         </div>
-        <p>
-            <a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
-        </p>
+
+        <!-- Show update profile link only if the logged-in user is the profile owner -->
+        {% if request.user.is_authenticated and request.user == profile.user %}
+            <p><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></p>
+        {% endif %}
     </div>
     
     <h2>Status Messages</h2>
-    <a href="{% url 'create_status_message' profile.pk %}">Post a Status Message</a>
+
+    <!-- Show create status message link only if the logged-in user is the profile owner -->
+    {% if request.user.is_authenticated and request.user == profile.user %}
+        <a href="{% url 'create_status_message' profile.pk %}">Post a Status Message</a>
+    {% endif %}
+
     {% if status_messages %}
         <ul>
-        {% for message in status_messages %}
-            <li>
-            <strong>{{ message.timestamp|date:"F j, Y, g:i a" }}:</strong> 
-            {{ message.message }}
+            {% for message in status_messages %}
+                <li>
+                    <strong>{{ message.timestamp|date:"F j, Y, g:i a" }}:</strong> 
+                    {{ message.message }}
 
-            {% if message.get_images %}
-                <div class="status-images">
-                    {% for img in message.get_images %}
-                        <img src="{{ img.image_file.url }}" alt="Image for status message" style="max-width:200px;">
-                    {% endfor %}
-                </div>
-            {% endif %}
-            <a href="{% url 'update_status_message' message.pk %}">Update</a>
-            <a href="{% url 'delete_status_message' message.pk %}" onclick="return confirm('Are you sure you want to delete this status message?');">Delete</a>
-            </li>
-            
-        {% endfor %}
+                    <!-- Display any images associated with the status message -->
+                    {% if message.get_images %}
+                        <div class="status-images">
+                            {% for img in message.get_images %}
+                                <img src="{{ img.image_file.url }}" alt="Image for status message" style="max-width:200px;">
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- Show update and delete links only if the logged-in user is the profile owner -->
+                    {% if request.user.is_authenticated and request.user == profile.user %}
+                        <a href="{% url 'update_status_message' message.pk %}">Update</a>
+                        <a href="{% url 'delete_status_message' message.pk %}" onclick="return confirm('Are you sure you want to delete this status message?');">Delete</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
         </ul>
     {% else %}
         <p>No status messages found.</p>
     {% endif %}
+
     <h3>Friends:</h3>
     <div class="friends-table">
         {% if profile.get_friends %}
@@ -64,13 +76,14 @@
         {% else %}
             <p>This user has no friends yet.</p>
         {% endif %}
+        
     </div>
-    <a href="{% url 'news_feed' profile.pk %}">View News Feed</a>
 
-    <a href="{% url 'friend_suggestions' profile.pk %}">View Friend Suggestions</a>
-
-    
-    
+    <!-- Show news feed and friend suggestions links only if the logged-in user is the profile owner -->
+    {% if request.user.is_authenticated and request.user == profile.user %}
+        <a href="{% url 'news_feed' profile.pk %}">View News Feed</a>
+        <a href="{% url 'friend_suggestions' profile.pk %}">View Friend Suggestions</a>
+    {% endif %}
 {% endblock %}
 
 <style>

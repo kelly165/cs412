@@ -1,10 +1,12 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 
 class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=1)  # Associate Profile with User
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     city = models.CharField(max_length=100)

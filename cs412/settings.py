@@ -28,7 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+#LOGIN_URL = '/mini_fb/login/'
+LOGIN_REDIRECT_URL = '/mini_fb/' 
 # Application definition
 
 INSTALLED_APPS = [

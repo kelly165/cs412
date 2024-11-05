@@ -31,9 +31,27 @@
         <label for="id_profile_image">Profile Image URL:</label>
         {{ form.profile_image }}
     </div>
+
+    <h3>User Registration</h3>
     
+    <div>
+        <label for="id_username">Username:</label>
+        {{ user_form.username }}
+    </div>
+    
+    <div>
+        <label for="id_password1">Password:</label>
+        {{ user_form.password1 }}
+    </div>
+    
+    <div>
+        <label for="id_password2">Password Confirmation:</label>
+        {{ user_form.password2 }}
+    </div>
+
     <div>
         <button type="submit">Create Profile</button>
     </div>
 </form>
+
 {% endblock %}
