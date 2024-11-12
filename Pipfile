@@ -11,3 +11,7 @@ gunicorn = "*"
 
 [requires]
 python_version = "3.12.6"
+
+pipenv install plotly
+pipenv install pandas
+pipenv lock
