@@ -12,9 +12,11 @@
         <nav>
             <ul>
                 <li><a href="{% url 'show_all_profiles' %}">Home</a> </li>
+
                 
                 <!-- Future navigation links -->
                 {% if user.is_authenticated %}
+                
                 
                 <li>Hello, {{ user.username }}!</li>
 
@@ -24,7 +26,9 @@
                 </form>
                 {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'create_profile' %}">Create Profile</a> </li>
                 {% endif %}
+
             </ul>
             
             
