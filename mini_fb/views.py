@@ -83,8 +83,8 @@ class ShowProfilePageView(DetailView):
     model = Profile
     template_name = 'mini_fb/show_profile.html'
 
-    def get_object(self):
-        return get_object_or_404(Profile, user=self.request.user)
+    #def get_object(self):
+        #return get_object_or_404(Profile, user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
