@@ -17,7 +17,7 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', ShowAllProfilesView.as_view(), name='show_all_profiles'),
-    path('profile/', ShowProfilePageView.as_view(), name='show_profile'),  # Updated: No pk
+    path('profile/<int:pk>', ShowProfilePageView.as_view(), name='show_profile'),  # Updated: No pk
     path('create_profile/', CreateProfileView.as_view(), name='create_profile'),
     path('status/create_status/', CreateStatusMessageView.as_view(), name='create_status_message'),  # Updated: No pk
     path('profile/update/', UpdateProfileView.as_view(), name='update_profile'),  # Updated: No pk

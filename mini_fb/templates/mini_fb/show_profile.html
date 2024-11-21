@@ -19,7 +19,7 @@
 
         <!-- Show update profile link only if the logged-in user is the profile owner -->
         {% if request.user.is_authenticated and request.user == profile.user %}
-            <p><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></p>
+            <p><a href="{% url 'update_profile'%}">Update Profile</a></p>
         {% endif %}
     </div>
     
@@ -27,7 +27,7 @@
 
     <!-- Show create status message link only if the logged-in user is the profile owner -->
     {% if request.user.is_authenticated and request.user == profile.user %}
-        <a href="{% url 'create_status_message' profile.pk %}">Post a Status Message</a>
+        <a href="{% url 'create_status_message'%}">Post a Status Message</a>
     {% endif %}
 
     {% if status_messages %}
@@ -81,8 +81,8 @@
 
     <!-- Show news feed and friend suggestions links only if the logged-in user is the profile owner -->
     {% if request.user.is_authenticated and request.user == profile.user %}
-        <a href="{% url 'news_feed' profile.pk %}">View News Feed</a>
-        <a href="{% url 'friend_suggestions' profile.pk %}">View Friend Suggestions</a>
+        <a href="{% url 'news_feed' %}">View News Feed</a>
+        <a href="{% url 'friend_suggestions' %}">View Friend Suggestions</a>
     {% endif %}
 {% endblock %}
 
