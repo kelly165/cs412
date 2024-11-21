@@ -89,6 +89,7 @@ class ShowProfilePageView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['status_messages'] = self.object.get_status_messages()
+        profile = Profile.objects.get(pk=self.kwargs['pk'])
         return context
 
 class CreateProfileView(CreateView):
