@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from .views import RegisterView, CustomLoginView, ClothingItemCreateView, CreateOutfitView, OutfitDeleteView
+from .views import RegisterView, CustomLoginView, ClothingItemCreateView, CreateOutfitView, OutfitDeleteView, EditClothingItemView, DeleteClothingItemView
 from django.contrib.auth.views import LogoutView
 
 
@@ -18,4 +18,7 @@ urlpatterns = [
     path('create_outfit/', CreateOutfitView.as_view(), name='create_outfit'),
     path('random_outfit/', views.RandomOutfitView.as_view(), name='random_outfit'),
     path('outfit/<int:pk>/delete/', OutfitDeleteView.as_view(), name='outfit_delete'),
+    path('clothingitem/edit/<int:pk>/', EditClothingItemView.as_view(), name='edit_clothing_item'),
+    path('clothingitem/delete/<int:pk>/', DeleteClothingItemView.as_view(), name='delete_clothing_item'),
+
 ]

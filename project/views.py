@@ -9,7 +9,7 @@ from django.views.generic.edit import CreateView
 from .forms import ClothingItemForm, ClothingItemFilterForm
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.views import LoginView
-from .forms import OutfitForm, ClothingItemFilterForm
+from .forms import OutfitForm, ClothingItemFilterForm, EditClothingItemForm
 import random
 
 
@@ -181,3 +181,17 @@ class OutfitDeleteView(LoginRequiredMixin, DeleteView):
         return Outfit.objects.filter(user=self.request.user)
     
 
+class EditClothingItemView(UpdateView):
+    model = ClothingItem
+    form_class = EditClothingItemForm
+    template_name = 'project/edit_clothing_item.html'
+    
+    # Redirect after successful edit
+    def get_success_url(self):
+        return reverse_lazy('clothing_item_detail', kwargs={'pk': self.object.pk})
+    
+
+class DeleteClothingItemView(DeleteView):
+    model = ClothingItem
+    template_name = 'project/clothingitem_confirm_delete.html'
+    success_url = reverse_lazy('clothing_item_list')

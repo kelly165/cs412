@@ -35,3 +35,10 @@ class ClothingItemFilterForm(forms.Form):
     )
 
     
+class EditClothingItemForm(forms.ModelForm):
+    class Meta:
+        model = ClothingItem
+        fields = [
+            'name', 'category', 'color', 
+            'size', 'season', 'image', 'occasions'
+        ]

@@ -3,6 +3,10 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <h2>{{ clothingitem.name }}</h2>
+<a href="{% url 'edit_clothing_item' clothingitem.pk %}">Edit</a>
+<a href="{% url 'delete_clothing_item' clothingitem.pk %}">Delete</a>
+
+
 <p>Category: {{ clothingitem.category }}</p>
 <p>Color: {{ clothingitem.color }}</p>
 <p>Size: {{ clothingitem.size }}</p>
