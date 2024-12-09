@@ -1,0 +1,27 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>{{ outfit.name }}</h2>
+<p>{{ outfit.description }}</p>
+
+<a href="{% url 'outfit_delete' outfit.id %}" 
+   style="color: red; font-weight: bold; border: 2px solid red; padding: 3px 10px; text-decoration: none;">
+   Delete
+</a>
+
+
+<h3>Clothing Items in This Outfit:</h3>
+<div class="outfit-items">
+    {% for outfit_item in outfit_items %}
+        <div class="item">
+            <a href="{% url 'clothingitem_detail' outfit_item.clothing_item.id %}">
+                <img src="{{ outfit_item.clothing_item.image.url }}" alt="{{ outfit_item.clothing_item.name }}" width="100" height="100">
+                <p>{{ outfit_item.clothing_item.name }}</p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

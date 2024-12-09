@@ -1,0 +1,16 @@
+<!-- clothingitem_detail.html -->
+ 
+{% extends 'project/base.html' %}
+{% block content %}
+<h2>{{ clothingitem.name }}</h2>
+<p>Category: {{ clothingitem.category }}</p>
+<p>Color: {{ clothingitem.color }}</p>
+<p>Size: {{ clothingitem.size }}</p>
+<p>Seasons: {{ clothingitem.season }}</p>
+<p>Occasions:
+    {% for occasion in clothingitem.occasions.all %}
+        {{ occasion.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+<img src="{{ clothingitem.image.url }}" alt="{{ clothingitem.name }}">
+{% endblock %}

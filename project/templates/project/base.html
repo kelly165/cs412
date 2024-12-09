@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Wardrobe</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'project_styles.css' %}">
+</head>
+<body>
+    <h1>MiniCloset</h1>
+    <nav>
+        
+        {% if user.is_authenticated %}
+            <div id="logout-btn-wrapper">
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        
+            
+
+            <a href="{% url 'clothing_item_list' %}">Wardrobe</a> |
+            <a href="{% url 'outfit_list' %}">Outfits</a> |
+            <a href="{% url 'add_clothing_item' %}">Add New Clothing Item</a> |
+            <a href="{% url 'create_outfit' %}">Create an Outfit</a> |
+            <a href="{% url 'random_outfit' %}">Random Outfit</a> |
+
+
+        {% else %}
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'register' %}">Create Profile</a> 
+        {% endif %}
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

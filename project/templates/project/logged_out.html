@@ -1,0 +1,14 @@
+<!-- project/templates/project/logged_out.html -->
+
+{% extends 'project/base.html' %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+    <div class="logged-out-container">
+        <h2>You have been logged out successfully!</h2>
+        <p><a href="{% url 'login' %}">Log in again</a></p>
+    </div>
+{% endblock %}
+
+

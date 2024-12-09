@@ -1,0 +1,84 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Create an Outfit</h2>
+
+<!-- Outfit Form -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ outfit_form.as_p }}
+    
+    <h3>Select Clothing Items</h3>
+    <fieldset>
+        <legend>Filter Clothing Items</legend>
+        {{ filter_form.as_p }}
+        <button type="submit" name="filter">Filter</button>
+    </fieldset>
+
+    <div class="clothing-selection">
+        <h2>Outfit Options</h2>
+
+        <div class="clothing-category">
+            <h4>Top</h4>
+            <div class="clothing-grid">
+                {% for item in clothing_items %}
+                    {% if item.category == 'Top' %}
+                    <label class="clothing-item">
+                        <input type="radio" name="top" value="{{ item.id }}">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" width="100">
+                        <span>{{ item.name }}</span>
+                    </label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="clothing-category">
+            <h4>Bottom</h4>
+            <div class="clothing-grid">
+                {% for item in clothing_items %}
+                    {% if item.category == 'Bottom' %}
+                    <label class="clothing-item">
+                        <input type="radio" name="bottom" value="{{ item.id }}">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" width="100">
+                        <span>{{ item.name }}</span>
+                    </label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="clothing-category">
+            <h4>Shoes</h4>
+            <div class="clothing-grid">
+                {% for item in clothing_items %}
+                    {% if item.category == 'Shoes' %}
+                    <label class="clothing-item">
+                        <input type="radio" name="shoes" value="{{ item.id }}">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" width="100">
+                        <span>{{ item.name }}</span>
+                    </label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="clothing-category">
+            <h4>Accessory</h4>
+            <div class="clothing-grid">
+                {% for item in clothing_items %}
+                    {% if item.category == 'Accessory' %}
+                    <label class="clothing-item">
+                        <input type="radio" name="accessory" value="{{ item.id }}">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" width="100">
+                        <span>{{ item.name }}</span>
+                    </label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <button type="submit">Create Outfit</button>
+</form>
+{% endblock %}

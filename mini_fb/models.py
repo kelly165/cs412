@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=1)  # Associate Profile with User
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='mini_fb_profile')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     city = models.CharField(max_length=100)

@@ -1,0 +1,11 @@
+<!-- outfit_list.html -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<h1>Your Outfits</h1>
+<ul>
+    {% for outfit in outfits %}
+        <li><a href="{% url 'outfit_detail' outfit.pk %}">{{ outfit.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -28,8 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-#LOGIN_URL = '/mini_fb/login/'
-LOGIN_REDIRECT_URL = '/mini_fb/' 
+LOGIN_URL = '/project/login/'
+LOGIN_REDIRECT_URL = '/project/'
+LOGOUT_REDIRECT_URL = '/project/login/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'blog',
     'mini_fb',
     'voter_analytics',
+    'project',
 
 ]
 
