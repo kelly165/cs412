@@ -9,6 +9,7 @@ gunicorn = "*"
 plotly = "*"
 pandas = "*"
 django-multiselectfield = "*"
+whitenoise = "*"
 
 [dev-packages]
 
