@@ -3,18 +3,25 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <h2>{{ clothingitem.name }}</h2>
-<a href="{% url 'edit_clothing_item' clothingitem.pk %}">Edit</a>
-<a href="{% url 'delete_clothing_item' clothingitem.pk %}">Delete</a>
 
+<!-- links to edit and delete clothing item -->
+<a href="{% url 'edit_clothing_item' clothingitem.pk %}">edit</a>
+<a href="{% url 'delete_clothing_item' clothingitem.pk %}">delete</a>
 
-<p>Category: {{ clothingitem.category }}</p>
-<p>Color: {{ clothingitem.color }}</p>
-<p>Size: {{ clothingitem.size }}</p>
-<p>Seasons: {{ clothingitem.season }}</p>
-<p>Occasions:
+<!-- display clothing item details -->
+<p>category: {{ clothingitem.category }}</p>
+<p>color: {{ clothingitem.color }}</p>
+<p>size: {{ clothingitem.size }}</p>
+<p>seasons: {{ clothingitem.season }}</p>
+
+<!-- list of occasions the clothing item is suitable for -->
+<p>occasions:
     {% for occasion in clothingitem.occasions.all %}
         {{ occasion.name }}{% if not forloop.last %}, {% endif %}
     {% endfor %}
 </p>
+
+<!-- display clothing item image -->
 <img src="{{ clothingitem.image.url }}" alt="{{ clothingitem.name }}">
+
 {% endblock %}

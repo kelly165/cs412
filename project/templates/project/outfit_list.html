@@ -3,6 +3,8 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <h1>Your Outfits</h1>
+<!-- display a list of user-created outfits -->
+
 <ul>
     {% for outfit in outfits %}
         <li><a href="{% url 'outfit_detail' outfit.pk %}">{{ outfit.name }}</a></li>

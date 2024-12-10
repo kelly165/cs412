@@ -3,6 +3,7 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <h1>Your Clothing Items</h1>
+<!-- list of user's clothes -->
 <ul>
     {% for item in clothing_items %}
         <li><a href="{% url 'clothing_item_detail' item.pk %}">{{ item.name }}</a></li>

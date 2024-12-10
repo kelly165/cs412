@@ -1,11 +1,15 @@
-{% extends 'project/base.html' %}
+{% extends 'project/base.html' %}  # use the base template for layout consistency
 
 {% block content %}
     <h1 style="text-align: center;">Random Outfit</h1>
 
+    <!-- main content area for displaying outfit items -->
     <div style="display: flex; justify-content: center; align-items: flex-start; gap: 50px;">
-        <!-- Main Column for Top and Bottom -->
+
+        <!-- left column for top and bottom items -->
         <div style="display: flex; flex-direction: column; align-items: center;">
+
+            <!-- display top item with conditional check -->
             <div>
                 <h3>Top: {% if outfit.top %}{{ outfit.top.name }}{% else %}No top available{% endif %}</h3>
                 {% if outfit.top %}
@@ -13,6 +17,7 @@
                 {% endif %}
             </div>
 
+            <!-- display bottom item with conditional check -->
             <div>
                 <h3>Bottom: {% if outfit.bottom %}{{ outfit.bottom.name }}{% else %}No bottom available{% endif %}</h3>
                 {% if outfit.bottom %}
@@ -21,8 +26,10 @@
             </div>
         </div>
 
-        <!-- Side Column for Shoes and Accessory -->
+        <!-- right column for shoes and accessory items -->
         <div style="display: flex; flex-direction: column; align-items: center;">
+
+            <!-- display shoes with conditional check -->
             <div>
                 <h3>Shoes: {% if outfit.shoes %}{{ outfit.shoes.name }}{% else %}No shoes available{% endif %}</h3>
                 {% if outfit.shoes %}
@@ -30,6 +37,7 @@
                 {% endif %}
             </div>
 
+            <!-- display accessory with conditional check -->
             <div>
                 <h3>Accessory: {% if outfit.accessory %}{{ outfit.accessory.name }}{% else %}No accessory available{% endif %}</h3>
                 {% if outfit.accessory %}
@@ -39,6 +47,7 @@
         </div>
     </div>
 
+    <!-- button to generate a new random outfit -->
     <form method="get" action="{% url 'random_outfit' %}" style="text-align: center; margin-top: 20px;">
         <button type="submit">Generate New Outfit</button>
     </form>

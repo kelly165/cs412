@@ -3,37 +3,42 @@
 <head>
     <title>Virtual Wardrobe</title>
     {% load static %}
+    <!-- link to Google Fonts for Poppins font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+    <!-- link to static stylesheet for project -->
     <link rel="stylesheet" href="{% static 'project_styles.css' %}">
 </head>
 <body>
+    <!-- main header for the site -->
     <h1>MiniCloset</h1>
     <nav>
-        
+        <!-- navigation links for authenticated users -->
         {% if user.is_authenticated %}
             <div id="logout-btn-wrapper">
+                <!-- form to log out -->
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form>
             </div>
-        
-            
 
+            <!-- links to various pages in the app -->
             <a href="{% url 'clothing_item_list' %}">Wardrobe</a> |
             <a href="{% url 'outfit_list' %}">Outfits</a> |
             <a href="{% url 'add_clothing_item' %}">Add New Clothing Item</a> |
             <a href="{% url 'create_outfit' %}">Create an Outfit</a> |
             <a href="{% url 'random_outfit' %}">Random Outfit</a> |
 
-
+        <!-- navigation links for unauthenticated users -->
         {% else %}
-        <a href="{% url 'login' %}">Login</a> |
-        <a href="{% url 'register' %}">Create Profile</a> 
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'register' %}">Create Profile</a> 
         {% endif %}
     </nav>
     <hr>
+    
+    <!-- content block that will be replaced by child templates -->
     {% block content %}
     {% endblock %}
 </body>

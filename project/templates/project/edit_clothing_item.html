@@ -3,10 +3,13 @@
 
 {% block content %}
   <h2>Edit Clothing Item</h2>
+  <!-- form for editing a clothing item -->
+
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Save Changes</button>
   </form>
+  <!-- link to cancel and return to clothing list -->
   <a href="{% url 'clothing_item_detail' object.pk %}">Cancel</a>
 {% endblock %}

@@ -1,25 +1,26 @@
 {% extends 'project/base.html' %}
 
 {% block content %}
-<h2>Create an Outfit</h2>
+<h2>create an outfit</h2>
 
-<!-- Outfit Form -->
+<!-- form for creating a new outfit -->
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ outfit_form.as_p }}
     
-    <h3>Select Clothing Items</h3>
+    <h3>select clothing items</h3>
     <fieldset>
-        <legend>Filter Clothing Items</legend>
+        <legend>filter clothing items</legend>
         {{ filter_form.as_p }}
-        <button type="submit" name="filter">Filter</button>
+        <button type="submit" name="filter">filter</button>
     </fieldset>
 
     <div class="clothing-selection">
-        <h2>Outfit Options</h2>
+        <h2>outfit options</h2>
 
+        <!-- section for selecting a top -->
         <div class="clothing-category">
-            <h4>Top</h4>
+            <h4>top</h4>
             <div class="clothing-grid">
                 {% for item in clothing_items %}
                     {% if item.category == 'Top' %}
@@ -33,8 +34,9 @@
             </div>
         </div>
 
+        <!-- section for selecting a bottom -->
         <div class="clothing-category">
-            <h4>Bottom</h4>
+            <h4>bottom</h4>
             <div class="clothing-grid">
                 {% for item in clothing_items %}
                     {% if item.category == 'Bottom' %}
@@ -48,8 +50,9 @@
             </div>
         </div>
 
+        <!-- section for selecting shoes -->
         <div class="clothing-category">
-            <h4>Shoes</h4>
+            <h4>shoes</h4>
             <div class="clothing-grid">
                 {% for item in clothing_items %}
                     {% if item.category == 'Shoes' %}
@@ -63,8 +66,9 @@
             </div>
         </div>
 
+        <!-- section for selecting accessories -->
         <div class="clothing-category">
-            <h4>Accessory</h4>
+            <h4>accessory</h4>
             <div class="clothing-grid">
                 {% for item in clothing_items %}
                     {% if item.category == 'Accessory' %}
@@ -79,6 +83,7 @@
         </div>
     </div>
 
-    <button type="submit">Create Outfit</button>
+    <!-- button to submit the form and create the outfit -->
+    <button type="submit">create outfit</button>
 </form>
 {% endblock %}

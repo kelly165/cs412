@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from .views import RegisterView, CustomLoginView, ClothingItemCreateView, CreateOutfitView, OutfitDeleteView, EditClothingItemView, DeleteClothingItemView
 from django.contrib.auth.views import LogoutView
 
-
+#url patterns for my project
 urlpatterns = [
     path('', views.ClothingItemListView.as_view(), name='clothing_item_list'),
     path('item/<int:pk>/', views.ClothingItemDetailView.as_view(), name='clothing_item_detail'),
